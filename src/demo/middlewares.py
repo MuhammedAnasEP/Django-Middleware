@@ -1,4 +1,8 @@
+from typing import Any
 from django.http import JsonResponse
+
+
+# Function based Middleware
 
 def set_request_data(get_response):
     print("set_request_data middleware")
@@ -24,3 +28,38 @@ def check_even(response):
         print("End-->")
         return respons
     return wrapper
+
+# ----------------- E N D ---------------------------------------------
+
+# Function based middleware
+
+class SetRequestData:
+    def __init__(self,get_response):
+        print("Initialized")
+        self.get_response = get_response
+
+    def __call__(self, request):
+        print("post data",request.POST)
+        data = request.POST.get('number')
+        print(data)
+        print("Start")
+        response = self.get_response(request)
+        print("End")
+        return response
+
+class CheckEven:
+    def __init__(self, get_response):
+        print("initialized -->")
+        self.get_response = get_response
+
+    def __call__(self, request):
+        print("start -->")
+        number = request.POST.get("number")
+        if number and int(number)%2:
+            return JsonResponse({"messge":"Failed from the middleware!"})
+        request.POST = {'data':number}
+        response = self.get_response(request)
+        print("end")
+        return response
+
+# ----------------------- E N D -----------------------------------------

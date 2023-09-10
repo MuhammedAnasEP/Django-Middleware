@@ -49,7 +49,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'demo.middlewares.set_request_data',
-    'demo.middlewares.check_even',
+    # 'demo.middlewares.check_even',
+    # 'demo.middlewares.SetRequestData',
+    'demo.middlewares.CheckEven',
 ]
 
 ROOT_URLCONF = 'src.urls'
