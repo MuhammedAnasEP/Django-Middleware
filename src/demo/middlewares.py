@@ -61,5 +61,20 @@ class CheckEven:
         response = self.get_response(request)
         print("end")
         return response
+    
+    # process view
+
+    def process_view(request, view_func, *args, **kargs):
+        print("procees view of CheckEven")
+        return None
+        # return JsonResponse({"message":"Returned from CheckEven"})
+
+
+    # Exception     
+
+    def process_exception(self, request, exception):
+        print("Exception in CheckEven")
+        msg = str(exception)
+        return JsonResponse({"messsage":msg}, status = 400)
 
 # ----------------------- E N D -----------------------------------------
